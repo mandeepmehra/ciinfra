@@ -1,0 +1,7 @@
+credentials
+gitlab-plugin
+workflow-aggregator
+docker-plugin
+sonar
+git
+blueocean
