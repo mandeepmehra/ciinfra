@@ -1,7 +1,7 @@
 import hudson.slaves.EnvironmentVariablesNodeProperty
 import jenkins.model.Jenkins
 
-ip = "192.168.1.254"
+ip = "10.0.1.4"
 instance = Jenkins.getInstance()
 globalNodeProperties = instance.getGlobalNodeProperties()
 envVarsNodePropertyList = globalNodeProperties.getAll(EnvironmentVariablesNodeProperty.class)

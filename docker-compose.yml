@@ -4,7 +4,7 @@ volumes:
 
 services:
   jenkins:
-    image: xebia-ge/jenkins:latest
+    image: mandeepmehra/jenkins:latest
     environment:
       #JAVA_OPTS: "-Djava.awt.headless=true"
       JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"   # Start jenkins unlocked
@@ -15,63 +15,63 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /Users/mandeepmehra:/root
       - /Users/mandeepmehra:/Users/mandeepmehra
-      - /work/projects/ge-poc/volumes/jenkins:/var/jenkins_home
-    secrets:
-      - jenkins-user
-      - jenkins-pass
-      - gitlab-user
-      - gitlab-pass
-      - docker-user
-      - docker-pass
-      - artifactory-user
-      - artifactory-pass
-    depends_on:
-      - artifactory
+      - /Users/mandeepmehra/projects/ge/volumes/jenkins:/var/jenkins_home
+    # secrets:
+    #   - jenkins-user
+    #   - jenkins-pass
+    #   - gitlab-user
+    #   - gitlab-pass
+    #   - docker-user
+    #   - docker-pass
+    #   - artifactory-user
+    #   - artifactory-pass
+    # depends_on:
+    #   - artifactory
 
 
-  artifactory:
-    image: docker.bintray.io/jfrog/artifactory-pro:latest
-    ports:
-     - 9090:8081
-    volumes:
-     - /work/projects/ge-poc/volumes/artifactory:/var/opt/jfrog/artifactory
+  # artifactory:
+  #   image: docker.bintray.io/jfrog/artifactory-pro:latest
+  #   ports:
+  #    - 9090:8081
+  #   volumes:
+  #    - /Users/mandeepmehra/projects/ge-poc/volumes/artifactory:/var/opt/jfrog/artifactory
  
   sonarqube:
     image: sonarqube:6.7-alpine
-    command: -Dsonar.ce.javaOpts=-Xmx2048m -Dsonar.web.javaOpts=-Xmx2048m
+    command: -Dsonar.ce.javaOpts=-Xmx1024m -Dsonar.web.javaOpts=-Xmx1024m
     ports:
       - 9000:9000
     volumes:
-      - /work/projects/ge-poc/volumes/sonarqube/conf:/opt/sonarqube/conf
-      - /work/projects/ge-poc/volumes/sonarqube/data:/opt/sonarqube/data
-      - /work/projects/ge-poc/volumes/sonarqube/logs:/opt/sonarqube/logs
-      - /work/projects/ge-poc/volumes/sonarqube/extensions:/opt/sonarqube/extensions
+      - /Users/mandeepmehra/projects/ge/volumes/sonarqube/conf:/opt/sonarqube/conf
+      - /Users/mandeepmehra/projects/ge/volumes/sonarqube/data:/opt/sonarqube/data
+      - /Users/mandeepmehra/projects/ge/volumes/sonarqube/logs:/opt/sonarqube/logs
+      - /Users/mandeepmehra/projects/ge/volumes/sonarqube/extensions:/opt/sonarqube/extensions
 
-  postgres:
-    image: arminc/clair-db:2017-03-15
+  # postgres:
+  #   image: arminc/clair-db:2017-03-15
 
-  clair:
-    image: arminc/clair-local-scan:v2.0.6
-    depends_on:
-      - postgres 
-    ports:
-     - 6060:6060
+  # clair:
+  #   image: arminc/clair-local-scan:v2.0.6
+  #   depends_on:
+  #     - postgres 
+  #   ports:
+  #    - 6060:6060
   
      
-secrets:                        # top level secrets block
-  jenkins-user:
-    external: true
-  jenkins-pass:
-    external: true
-  gitlab-user:
-    external: true
-  gitlab-pass:
-    external: true
-  docker-user:
-    external: true
-  docker-pass:
-    external: true
-  artifactory-user:
-    external: true
-  artifactory-pass:
-    external: true
+# secrets:                        # top level secrets block
+#   jenkins-user:
+#     external: true
+#   jenkins-pass:
+#     external: true
+#   gitlab-user:
+#     external: true
+#   gitlab-pass:
+#     external: true
+#   docker-user:
+#     external: true
+#   docker-pass:
+#     external: true
+#   artifactory-user:
+#     external: true
+#   artifactory-pass:
+#     external: true

@@ -1,0 +1,15 @@
+version: '3.1'
+volumes:
+  Jenkins_Home:
+
+services:
+  postgres:
+    image: arminc/clair-db:2017-03-15
+
+  clair:
+    image: arminc/clair-local-scan:latest
+    depends_on:
+      - postgres 
+    ports:
+     - 6060:6060
+  

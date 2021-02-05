@@ -2,7 +2,7 @@
 
 FROM jenkins/jenkins:lts
 
-LABEL Maintainer="Priyanku Konar"
+LABEL Maintainer="Mandeep Mehra"
 
 # Customize Jenkins
 
@@ -26,23 +26,23 @@ RUN curl -fsSL https://get.docker.com/ | bash -
 RUN npm install -g sonarqube-scanner
 
 # Install protractor
-RUN npm install -g protractor
+# RUN npm install -g protractor
 
-RUN npm install -g mocha
+# RUN npm install -g mocha
 
 # Install helm client
-ENV BASE_URL="https://get.helm.sh"
-ENV TAR_FILE="helm-v2.14.1-linux-amd64.tar.gz"
+# ENV BASE_URL="https://get.helm.sh"
+# ENV TAR_FILE="helm-v2.14.1-linux-amd64.tar.gz"
 
-RUN curl -L ${BASE_URL}/${TAR_FILE} |tar xvz && \
-    mv linux-amd64/helm /usr/bin/helm && \
-    chmod +x /usr/bin/helm && \
-    rm -rf linux-amd64 
+# RUN curl -L ${BASE_URL}/${TAR_FILE} |tar xvz && \
+#     mv linux-amd64/helm /usr/bin/helm && \
+#     chmod +x /usr/bin/helm && \
+#     rm -rf linux-amd64 
 
 # Install Chrome Headless browser
 # Set the Chrome repo.
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    # && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
     
 # Install Chrome.
-RUN apt-get update && apt-get -y install google-chrome-stable
+# RUN apt-get update && apt-get -y install google-chrome-stable
